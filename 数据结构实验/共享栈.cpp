@@ -55,26 +55,26 @@ void sharedstack<T>::Push(int i, T x) //实现插入栈的操作
 	if (top1 != top2) //判断是否栈满
 	{
 		if (i == 1)
-			data[++top1] = x;
+			data[++top1] = x;  //若栈不满，通过i判断要入那个栈
 		else if (i == 2)
-			data[--top2] = x;
+			data[--top2] = x;  //若i为1则使top1上移、data[top1] = x，若i为2则使top2下移、data[top2] = x。
 
 	}
-	else
+	else  //若栈满则抛出错误信息：“上溢“。
 		throw"上溢";
 }
 
 template<class T>
 T sharedstack<T>::Pop(int i) //实现出栈操作
 {
-	if (i == 1)
+	if (i == 1)  //通过i判断应该对那个栈进行出栈操作。
 		if (top1 != -1)
-			return data[top1--];
+			return data[top1--];  //若栈不为空，则返回data[top1]的值，并下移top1
 		else
-			throw"下溢";
+			throw"下溢";  //若i为1，先判断该栈是否为空，即判断top1是否为-1，若栈1为空则抛出错误信息：“下溢“
 	if (i == 2)
-		if (top2 != Maxsize)
-			return data[top2++];
+		if (top2 != Maxsize)  //若i为2，步骤与上面相似
+			return data[top2++];  
 		else
 			throw"下溢";
 }
